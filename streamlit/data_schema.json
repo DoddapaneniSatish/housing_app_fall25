@@ -1,0 +1,151 @@
+{
+  "numerical": {
+    "tenure": {
+      "min": 0,
+      "max": 72,
+      "mean": 32.4,
+      "median": 29
+    },
+    "monthly_charges": {
+      "min": 18.25,
+      "max": 118.75,
+      "mean": 64.8,
+      "median": 70.35
+    },
+    "total_charges": {
+      "min": 0.0,
+      "max": 8684.8,
+      "mean": 2283.3,
+      "median": 1397.5
+    },
+    "senior_citizen": {
+      "min": 0,
+      "max": 1,
+      "mean": 0.16,
+      "median": 0
+    }
+  },
+  "categorical": {
+    "gender": {
+      "unique_values": ["Female", "Male"],
+      "value_counts": {
+        "Male": 3555,
+        "Female": 3488
+      }
+    },
+    "contract_type": {
+      "unique_values": ["Month-to-month", "One year", "Two year"],
+      "value_counts": {
+        "Month-to-month": 3875,
+        "One year": 1473,
+        "Two year": 1695
+      }
+    },
+    "payment_method": {
+      "unique_values": [
+        "Electronic check",
+        "Mailed check",
+        "Bank transfer (automatic)",
+        "Credit card (automatic)"
+      ],
+      "value_counts": {
+        "Electronic check": 2365,
+        "Mailed check": 1612,
+        "Bank transfer (automatic)": 1544,
+        "Credit card (automatic)": 1522
+      }
+    },
+    "internet_service": {
+      "unique_values": ["DSL", "Fiber optic", "No"],
+      "value_counts": {
+        "Fiber optic": 3096,
+        "DSL": 2421,
+        "No": 1526
+      }
+    },
+    "partner": {
+      "unique_values": ["Yes", "No"],
+      "value_counts": {
+        "No": 3641,
+        "Yes": 3402
+      }
+    },
+    "dependents": {
+      "unique_values": ["Yes", "No"],
+      "value_counts": {
+        "No": 4933,
+        "Yes": 2110
+      }
+    },
+    "phone_service": {
+      "unique_values": ["Yes", "No"],
+      "value_counts": {
+        "Yes": 6361,
+        "No": 682
+      }
+    },
+    "paperless_billing": {
+      "unique_values": ["Yes", "No"],
+      "value_counts": {
+        "Yes": 4171,
+        "No": 2872
+      }
+    },
+    "multiple_lines": {
+      "unique_values": ["Yes", "No", "No phone service"],
+      "value_counts": {
+        "No": 3390,
+        "Yes": 2971,
+        "No phone service": 682
+      }
+    },
+    "online_security": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 3498,
+        "Yes": 2019,
+        "No internet service": 1526
+      }
+    },
+    "online_backup": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 3088,
+        "Yes": 2429,
+        "No internet service": 1526
+      }
+    },
+    "device_protection": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 3095,
+        "Yes": 2422,
+        "No internet service": 1526
+      }
+    },
+    "tech_support": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 3473,
+        "Yes": 2044,
+        "No internet service": 1526
+      }
+    },
+    "streaming_tv": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 2810,
+        "Yes": 2707,
+        "No internet service": 1526
+      }
+    },
+    "streaming_movies": {
+      "unique_values": ["Yes", "No", "No internet service"],
+      "value_counts": {
+        "No": 2785,
+        "Yes": 2732,
+        "No internet service": 1526
+      }
+    }
+  }
+}
