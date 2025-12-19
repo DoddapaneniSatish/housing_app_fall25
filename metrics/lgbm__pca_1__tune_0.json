@@ -1,0 +1,48 @@
+{
+  "run_id": "lgbm__pca_1__tune_0",
+  "timestamp": "2025-12-19T03:16:19.352026",
+  "f1": 0.5721583652618135,
+  "confusion_matrix": [
+    [
+      850,
+      185
+    ],
+    [
+      150,
+      224
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.85,
+      "recall": 0.821256038647343,
+      "f1-score": 0.8353808353808354,
+      "support": 1035.0
+    },
+    "1": {
+      "precision": 0.5476772616136919,
+      "recall": 0.5989304812834224,
+      "f1-score": 0.5721583652618135,
+      "support": 374.0
+    },
+    "accuracy": 0.7622427253371186,
+    "macro avg": {
+      "precision": 0.6988386308068459,
+      "recall": 0.7100932599653826,
+      "f1-score": 0.7037696003213245,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.7697525165674385,
+      "recall": 0.7622427253371186,
+      "f1-score": 0.7655119895153178,
+      "support": 1409.0
+    }
+  },
+  "meta": {
+    "model": "lgbm",
+    "use_pca": true,
+    "use_tuning": false,
+    "best_params": null
+  }
+}

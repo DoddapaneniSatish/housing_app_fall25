@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     container_name: housing-api
     # Use 'expose' instead of 'ports' to keep it internal only
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     volumes:
       # Mount models folder for future model loading
       - ./models:/app/models:ro

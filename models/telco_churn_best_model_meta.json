@@ -1,0 +1,7 @@
+{
+  "run_id": "lgbm__pca_0__tune_1",
+  "model": "lgbm",
+  "use_pca": false,
+  "use_tuning": true,
+  "f1": 0.6285714285714286
+}

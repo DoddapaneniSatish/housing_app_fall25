@@ -1,0 +1,56 @@
+{
+  "run_id": "lgbm__pca_1__tune_1",
+  "timestamp": "2025-12-19T03:17:05.496619",
+  "f1": 0.6170442286947141,
+  "confusion_matrix": [
+    [
+      768,
+      267
+    ],
+    [
+      88,
+      286
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.897196261682243,
+      "recall": 0.7420289855072464,
+      "f1-score": 0.8122686409307245,
+      "support": 1035.0
+    },
+    "1": {
+      "precision": 0.5171790235081374,
+      "recall": 0.7647058823529411,
+      "f1-score": 0.6170442286947141,
+      "support": 374.0
+    },
+    "accuracy": 0.7480482611781405,
+    "macro avg": {
+      "precision": 0.7071876425951902,
+      "recall": 0.7533674339300938,
+      "f1-score": 0.7146564348127193,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.796325823728293,
+      "recall": 0.7480482611781405,
+      "f1-score": 0.7604489601810667,
+      "support": 1409.0
+    }
+  },
+  "meta": {
+    "model": "lgbm",
+    "use_pca": true,
+    "use_tuning": true,
+    "best_params": {
+      "n_estimators": 278,
+      "learning_rate": 0.018009069541601853,
+      "num_leaves": 73,
+      "max_depth": 4,
+      "min_child_samples": 28,
+      "subsample": 0.748416284372929,
+      "colsample_bytree": 0.8466233057327129
+    }
+  }
+}

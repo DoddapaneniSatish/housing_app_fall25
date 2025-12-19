@@ -1,0 +1,48 @@
+{
+  "run_id": "rf__pca_0__tune_0",
+  "timestamp": "2025-12-19T03:11:50.706883",
+  "f1": 0.5377643504531722,
+  "confusion_matrix": [
+    [
+      925,
+      110
+    ],
+    [
+      196,
+      178
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.8251561106155219,
+      "recall": 0.893719806763285,
+      "f1-score": 0.8580705009276438,
+      "support": 1035.0
+    },
+    "1": {
+      "precision": 0.6180555555555556,
+      "recall": 0.47593582887700536,
+      "f1-score": 0.5377643504531722,
+      "support": 374.0
+    },
+    "accuracy": 0.7828246983676366,
+    "macro avg": {
+      "precision": 0.7216058330855387,
+      "recall": 0.6848278178201452,
+      "f1-score": 0.6979174256904079,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.7701840683213931,
+      "recall": 0.7828246983676366,
+      "f1-score": 0.7730495638960949,
+      "support": 1409.0
+    }
+  },
+  "meta": {
+    "model": "rf",
+    "use_pca": false,
+    "use_tuning": false,
+    "best_params": null
+  }
+}

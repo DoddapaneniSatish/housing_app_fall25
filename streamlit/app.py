@@ -9,7 +9,11 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 # MUST be the first Streamlit command
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="Housing Prediction", page_icon="🏠", layout="centered")
+st.set_page_config(
+    page_title="Telco Customer Churn Prediction",
+    page_icon="📞",
+    layout="centered",
+)
 
 # -----------------------------------------------------------------------------
 # Config
@@ -39,12 +43,13 @@ categorical_features = schema.get("categorical", {})
 # -----------------------------------------------------------------------------
 # Streamlit UI
 # -----------------------------------------------------------------------------
-st.title("🏠 Housing Prediction App")
+st.title("📞 Telco Customer Churn Prediction App")
 st.write(
-    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction."
+    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** "
+    "to predict whether a customer will churn."
 )
 
-st.header("Input Features")
+st.header("Input Customer Features")
 
 user_input: Dict[str, Any] = {}
 
@@ -53,16 +58,12 @@ user_input: Dict[str, Any] = {}
 # -----------------------------------------------------------------------------
 st.subheader("Numerical Features")
 
-# Decide which features use sliders
-SLIDER_FEATURES = {"longitude", "latitude", "housing_median_age", "median_income"}
-
 for feature_name, stats in numerical_features.items():
     min_val = float(stats.get("min", 0.0))
     max_val = float(stats.get("max", 1000.0))
     mean_val = float(stats.get("mean", (min_val + max_val) / 2))
     median_val = float(stats.get("median", mean_val))
 
-    # Use median as default
     default_val = median_val
 
     label = feature_name.replace("_", " ").title()
@@ -71,48 +72,26 @@ for feature_name, stats in numerical_features.items():
         f"Mean: {mean_val:.2f}, Median: {median_val:.2f}"
     )
 
-    if feature_name in SLIDER_FEATURES:
-        # Determine step size based on range and semantics
-        if feature_name in {"housing_median_age"}:
-            step = 1.0  # age in years, int-like
-        elif feature_name in {"median_income"}:
-            step = 0.1  # more granular
-        else:
-            # generic heuristic for latitude/longitude
-            step = 0.01
-
-        user_input[feature_name] = st.slider(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
+    range_val = max_val - min_val
+    if range_val > 1000:
+        step = 10.0
+    elif range_val > 100:
+        step = 1.0
+    elif range_val > 10:
+        step = 0.1
     else:
-        # Fallback to number_input for wide-range features
-        range_val = max_val - min_val
-        if range_val > 10000:
-            step = 10.0
-        elif range_val > 1000:
-            step = 5.0
-        elif range_val > 100:
-            step = 1.0
-        elif range_val > 10:
-            step = 0.1
-        else:
-            step = 0.01
+        step = 0.01
 
-        user_input[feature_name] = st.number_input(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
+    user_input[feature_name] = st.number_input(
+        label,
+        min_value=min_val,
+        max_value=max_val,
+        value=float(default_val),
+        step=step,
+        help=help_text,
+        key=feature_name,
+    )
+
 # -----------------------------------------------------------------------------
 # Categorical Features
 # -----------------------------------------------------------------------------
@@ -125,7 +104,7 @@ for feature_name, info in categorical_features.items():
     if not unique_values:
         continue
 
-    # Default to the most common value
+    # Default to most frequent category
     if value_counts:
         default_value = max(value_counts, key=value_counts.get)
     else:
@@ -151,7 +130,7 @@ st.markdown("---")
 # -----------------------------------------------------------------------------
 # Predict Button
 # -----------------------------------------------------------------------------
-if st.button("🔮 Predict", type="primary"):
+if st.button("🔮 Predict Churn", type="primary"):
     payload = {"instances": [user_input]}
 
     with st.spinner("Calling API for prediction..."):
@@ -164,23 +143,33 @@ if st.button("🔮 Predict", type="primary"):
                 st.error(f"❌ API error: HTTP {resp.status_code} - {resp.text}")
             else:
                 data = resp.json()
-                preds = data.get("predictions", [])
 
-                if not preds:
-                    st.warning("⚠️ No predictions returned from API.")
+                churn_preds = data.get("churn_prediction", [])
+                churn_probs = data.get("churn_probability", [])
+
+                if not churn_preds:
+                    st.warning("⚠️ No prediction returned from API.")
                 else:
-                    pred = preds[0]
+                    churn = churn_preds[0]
+                    prob = churn_probs[0]
+
                     st.success("✅ Prediction successful!")
 
                     st.subheader("Prediction Result")
 
-                    # Display prediction with nice formatting
-                    if isinstance(pred, (int, float)):
-                        st.metric(label="Predicted Value", value=f"{pred:,.2f}")
+                    if churn == 1:
+                        st.metric(
+                            label="Churn Prediction",
+                            value="YES ❌",
+                            delta=f"Probability: {prob:.2%}",
+                        )
                     else:
-                        st.metric(label="Predicted Class", value=str(pred))
+                        st.metric(
+                            label="Churn Prediction",
+                            value="NO ✅",
+                            delta=f"Probability: {prob:.2%}",
+                        )
 
-                    # Show input summary in expander
                     with st.expander("📋 View Input Summary"):
                         st.json(user_input)
 

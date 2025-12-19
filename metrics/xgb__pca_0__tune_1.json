@@ -1,0 +1,55 @@
+{
+  "run_id": "xgb__pca_0__tune_1",
+  "timestamp": "2025-12-19T03:14:38.159099",
+  "f1": 0.5869894099848714,
+  "confusion_matrix": [
+    [
+      942,
+      93
+    ],
+    [
+      180,
+      194
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.839572192513369,
+      "recall": 0.9101449275362319,
+      "f1-score": 0.8734353268428373,
+      "support": 1035.0
+    },
+    "1": {
+      "precision": 0.6759581881533101,
+      "recall": 0.5187165775401069,
+      "f1-score": 0.5869894099848714,
+      "support": 374.0
+    },
+    "accuracy": 0.8062455642299503,
+    "macro avg": {
+      "precision": 0.7577651903333396,
+      "recall": 0.7144307525381695,
+      "f1-score": 0.7302123684138544,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.796143067154489,
+      "recall": 0.8062455642299503,
+      "f1-score": 0.7974021310267414,
+      "support": 1409.0
+    }
+  },
+  "meta": {
+    "model": "xgb",
+    "use_pca": false,
+    "use_tuning": true,
+    "best_params": {
+      "n_estimators": 555,
+      "learning_rate": 0.020018748321877916,
+      "max_depth": 2,
+      "subsample": 0.767984934939018,
+      "colsample_bytree": 0.94782479567811,
+      "reg_lambda": 0.028179859405246203
+    }
+  }
+}

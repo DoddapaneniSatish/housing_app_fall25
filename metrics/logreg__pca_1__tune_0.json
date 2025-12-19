@@ -1,0 +1,48 @@
+{
+  "run_id": "logreg__pca_1__tune_0",
+  "timestamp": "2025-12-19T03:11:41.561623",
+  "f1": 0.6109936575052854,
+  "confusion_matrix": [
+    [
+      752,
+      283
+    ],
+    [
+      85,
+      289
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.8984468339307049,
+      "recall": 0.7265700483091787,
+      "f1-score": 0.8034188034188035,
+      "support": 1035.0
+    },
+    "1": {
+      "precision": 0.5052447552447552,
+      "recall": 0.7727272727272727,
+      "f1-score": 0.6109936575052854,
+      "support": 374.0
+    },
+    "accuracy": 0.7388218594748048,
+    "macro avg": {
+      "precision": 0.7018457945877301,
+      "recall": 0.7496486605182258,
+      "f1-score": 0.7072062304620444,
+      "support": 1409.0
+    },
+    "weighted avg": {
+      "precision": 0.794076658324924,
+      "recall": 0.7388218594748048,
+      "f1-score": 0.7523421500677347,
+      "support": 1409.0
+    }
+  },
+  "meta": {
+    "model": "logreg",
+    "use_pca": true,
+    "use_tuning": false,
+    "best_params": null
+  }
+}
