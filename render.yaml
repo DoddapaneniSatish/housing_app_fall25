@@ -2,14 +2,22 @@ services:
   # -------------------------------
   # FastAPI backend (Telco Churn)
   # -------------------------------
+ services:
   - type: web
     name: telco-churn-api
     env: docker
     plan: free
+
     dockerfilePath: api/Dockerfile
-    dockerContext: .
+    dockerContext: api   # 🔥 THIS IS THE FIX
+
     autoDeploy: true
     healthCheckPath: /health
+
+    envVars:
+      - key: PORT
+        value: 8000
+
     
 
   # -------------------------------
