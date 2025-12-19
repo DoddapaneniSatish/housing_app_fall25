@@ -1,5 +1,4 @@
 import json
-import os
 from pathlib import Path
 from typing import Any, Dict
 
@@ -16,32 +15,13 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# Config
+# Config (CLOUD ONLY)
 # -----------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent
 SCHEMA_PATH = BASE_DIR / "data_schema.json"
 
-
-def get_api_base_url() -> str:
-    """
-    Resolve API URL for:
-    - Local development
-    - Docker Compose
-    - Cloud (Render / Streamlit Cloud)
-    """
-    # Highest priority: explicitly set (Render / Streamlit Cloud)
-    if os.getenv("API_URL"):
-        return os.getenv("API_URL")
-
-    # Docker Compose internal network
-    if os.getenv("DOCKER_ENV") == "true":
-        return "http://api:8000"
-
-    # Local fallback
-    return "http://localhost:8000"
-
-
-API_BASE_URL = get_api_base_url()
+# ✅ Render API (ONLY)
+API_BASE_URL = "https://telco-customer-churn-ml.onrender.com"
 PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
 
 # -----------------------------------------------------------------------------
@@ -65,8 +45,8 @@ categorical_features = schema.get("categorical", {})
 # -----------------------------------------------------------------------------
 st.title("📞 Telco Customer Churn Prediction App")
 st.write(
-    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** "
-    "to predict whether a customer will churn."
+    f"This app sends your inputs to the FastAPI backend deployed on **Render**:\n\n"
+    f"🔗 `{API_BASE_URL}`"
 )
 
 st.header("Input Customer Features")
@@ -124,11 +104,11 @@ for feature_name, info in categorical_features.items():
     if not unique_values:
         continue
 
-    # Default to most frequent category
-    if value_counts:
-        default_value = max(value_counts, key=value_counts.get)
-    else:
-        default_value = unique_values[0]
+    default_value = (
+        max(value_counts, key=value_counts.get)
+        if value_counts
+        else unique_values[0]
+    )
 
     try:
         default_idx = unique_values.index(default_value)
@@ -153,7 +133,7 @@ st.markdown("---")
 if st.button("🔮 Predict Churn", type="primary"):
     payload = {"instances": [user_input]}
 
-    with st.spinner("Calling API for prediction..."):
+    with st.spinner("Calling Render API for prediction..."):
         try:
             resp = requests.post(PREDICT_ENDPOINT, json=payload, timeout=30)
         except requests.exceptions.RequestException as e:
@@ -195,6 +175,6 @@ if st.button("🔮 Predict Churn", type="primary"):
 
 st.markdown("---")
 st.caption(
-    f"📁 Schema: `{SCHEMA_PATH}`  \n"
-    f"🌐 API: `{API_BASE_URL}`"
+    f"🌐 API: `{API_BASE_URL}`  \n"
+    f"📁 Schema: `{SCHEMA_PATH}`"
 )
