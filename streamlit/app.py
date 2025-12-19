@@ -22,8 +22,26 @@ BASE_DIR = Path(__file__).resolve().parent
 SCHEMA_PATH = BASE_DIR / "data_schema.json"
 
 
-# API_URL is set in docker-compose environment
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
+def get_api_base_url() -> str:
+    """
+    Resolve API URL for:
+    - Local development
+    - Docker Compose
+    - Cloud (Render / Streamlit Cloud)
+    """
+    # Highest priority: explicitly set (Render / Streamlit Cloud)
+    if os.getenv("API_URL"):
+        return os.getenv("API_URL")
+
+    # Docker Compose internal network
+    if os.getenv("DOCKER_ENV") == "true":
+        return "http://api:8000"
+
+    # Local fallback
+    return "http://localhost:8000"
+
+
+API_BASE_URL = get_api_base_url()
 PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
 
 # -----------------------------------------------------------------------------
