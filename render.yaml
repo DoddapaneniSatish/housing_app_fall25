@@ -1,0 +1,26 @@
+services:
+  # -------------------------------
+  # FastAPI backend (Telco Churn)
+  # -------------------------------
+  - type: web
+    name: telco-churn-api
+    env: docker
+    plan: free
+    dockerfilePath: api/Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    healthCheckPath: /health
+
+  # -------------------------------
+  # Streamlit frontend
+  # -------------------------------
+  - type: web
+    name: telco-churn-streamlit
+    env: docker
+    plan: free
+    dockerfilePath: streamlit/Dockerfile
+    dockerContext: .
+    autoDeploy: true
+    envVars:
+      - key: API_URL
+        value: https://telco-churn-api.onrender.com
