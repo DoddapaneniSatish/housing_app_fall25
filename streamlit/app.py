@@ -18,7 +18,9 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # Config
 # -----------------------------------------------------------------------------
-SCHEMA_PATH = Path("/app/data/data_schema.json")
+BASE_DIR = Path(__file__).resolve().parent
+SCHEMA_PATH = BASE_DIR / "data_schema.json"
+
 
 # API_URL is set in docker-compose environment
 API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
